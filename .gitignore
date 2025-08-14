@@ -1,0 +1,59 @@
+# Composer / Dependencies
+/vendor/
+/fuel/vendor/
+/composer.lock
+
+# FuelPHP Core & Packages
+/fuel/core/
+/fuel/packages/
+/fuel/app/modules/
+/fuel/app/vendor/
+
+# config files
+fuel/app/config/*.php
+fuel/app/config/*/*.php
+
+# Logs & Cache
+/fuel/app/logs/
+/fuel/app/cache/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE & Editor Settings
+.vscode/*
+!.vscode/launch.json
+!.vscode/*.code-snippets
+
+.idea/
+!.idea/workspace.xml
+!.idea/shelf/
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Production/Build Artifacts
+/build/
+/dist/
+/public/assets/
+
+# macOS
+.DS_Store
+
+# Misc
+*.pem
+*.tsbuildinfo
+.vercel
+
+nbproject
+*.tmproj
+*.swp~
+
+#intellij
+/change.php
