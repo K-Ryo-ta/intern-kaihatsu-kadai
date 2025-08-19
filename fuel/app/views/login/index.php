@@ -3,43 +3,75 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Login</title>
-
-  <?php echo Asset::css('style.css'); ?>
-  <?php echo Asset::js('knockout-3.5.1.js'); ?>
+  <title>Register</title>
+  <?= Asset::css('style.css'); ?>
+  <?= Asset::js('knockout-3.5.1.js'); ?>
 </head>
 
 <body>
 
-  <div class="login-container">
-    <div class="form-group">
-      <label for="username">ユーザー名</label>
-      <input type="text" id="username" placeholder="ユーザー名" data-bind="value: userName">
-    </div>
+  <?php
+  $initial = [
+    'username' => $old['username'] ?? '',
+  ];
+  ?>
+  <div class="login-container" id="login-root">
+    <h1>ログイン</h1>
 
-    <div class="form-group">
-      <label for="password">パスワード</label>
-      <input type="text" id="password" placeholder="パスワード" data-bind="value: password">
-    </div>
+    <?php if (!empty($errors)): ?>
+      <div style="color:red; margin-bottom:12px;">
+        <?php foreach ($errors as $msg): ?>
+          <div><?= htmlspecialchars($msg, ENT_QUOTES, 'UTF-8') ?></div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
 
-    <div class="login-button-container">
-      <button class="login-button">ログイン</button>
-    </div>
+    <form method="post" action="<?= \Uri::current(); ?>">
+      <div class="form-group">
+        <label for="username">ユーザー名</label>
+        <input type="text" id="username" name="username"
+          data-bind="value: username, valueUpdate: 'afterkeydown'"
+          required>
+      </div>
 
+      <div class="form-group">
+        <label for="password">パスワード</label>
+        <input type="password" id="password" name="password"
+          data-bind="value: password, valueUpdate: 'afterkeydown'"
+          required>
+      </div>
+
+      <div class="login-button-container" style="margin-top:12px;">
+        <button type="submit" class="login-button"
+          data-bind="enable: canSubmit()">ログイン</button>
+      </div>
+
+      <p data-bind="visible: !canSubmit(), text: helperMessage"
+        style="color:#888; margin-top:8px;"></p>
+    </form>
   </div>
 
-
-  <script type="text/javascript">
-    const initialData = <?php echo $userData; ?>;
+  <script>
+    const initialLogin = <?= json_encode($initial, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
 
     function LoginViewModel(data) {
-      this.userName = ko.observable(data.userName);
-      this.password = ko.observable(data.password);
+      const self = this;
+      this.username = ko.observable(data.username || '');
+      this.password = ko.observable('');
+
+      this.canSubmit = ko.computed(() =>
+        (self.username() || '').length >= 1 && (self.password() || '').length >= 1
+      );
+
+      this.helperMessage = ko.computed(() => {
+        if (!(self.username() || '').length) return 'ユーザー名を入力してください。';
+        if (!(self.password() || '').length) return 'パスワードを入力してください。';
+        return '';
+      });
     }
 
-    ko.applyBindings(new LoginViewModel(initialData));
+    ko.applyBindings(new LoginViewModel(initialLogin), document.getElementById('login-root'));
   </script>
-
 </body>
 
 </html>
