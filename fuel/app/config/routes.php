@@ -1,7 +1,8 @@
 <?php
-return array(
-	'_root_'  => 'welcome/index',  // The default route
-	'_404_'   => 'welcome/404',    // The main 404 route
-	
-	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
-);
+return [
+  '_root_' => 'auth/register',
+  'register' => 'auth/register',
+  'login' => 'auth/login',
+  'logout' => 'auth/logout',
+  'dashboard' => 'dashboard/index',
+];
