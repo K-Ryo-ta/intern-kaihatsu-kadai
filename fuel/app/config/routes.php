@@ -1,8 +1,9 @@
 <?php
 return [
-  '_root_' => 'auth/register',
+  '_root_' => 'dashboard/index',
   'register' => 'auth/register',
   'login' => 'auth/login',
   'logout' => 'auth/logout',
-  'dashboard' => 'dashboard/index',
+  'portfolios/create' => 'portfolios/create',
+  'portfolios/detail/(:num)' => 'portfolios/detail/$1',
 ];

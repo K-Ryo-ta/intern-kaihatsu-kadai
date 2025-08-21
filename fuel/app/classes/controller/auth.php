@@ -54,8 +54,7 @@ class Controller_Auth extends Controller_Base
     $errors = [];
 
     if (\Auth::check()) {
-      \Messages::info(__('login.already-logged-in'));
-      \Response::redirect_back('dashboard');
+      \Response::redirect('/');
     }
 
     if (\Input::method() === 'POST') {
@@ -89,7 +88,6 @@ class Controller_Auth extends Controller_Base
   {
     \Auth::dont_remember_me();
     \Auth::logout();
-    \Messages::success(__('login.logged-out'));
     \Response::redirect_back();
   }
 }
