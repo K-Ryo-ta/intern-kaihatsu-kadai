@@ -41,7 +41,7 @@ lerna-debug.log*
 # Production/Build Artifacts
 /build/
 /dist/
-/public/assets/
+/public/uploads/
 
 # macOS
 .DS_Store
