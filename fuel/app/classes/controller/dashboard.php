@@ -40,7 +40,6 @@ class Controller_Dashboard extends Controller_Base
     $v->set('list', $rows, false);
     $v->set('placeholder', '/assets/img/placeholder.png', false);
 
-    // ページャ（ダッシュボードに合わせる）
     $pager = [
       'page'     => $page,
       'per_page' => $per_page,
