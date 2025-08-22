@@ -1,27 +1,36 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <title>Header</title>
-
-  <?php echo Asset::css('header.css'); ?>
-  <?php echo Asset::js('knockout-3.5.1.js'); ?>
-</head>
-
-<header class="main-header">
+<header id="header" class="main-header">
   <div class="header-container">
     <div class="logo">
-      <a href="/">個人開発物投稿プラットフォーム</a>
+      <a data-bind="attr:{href: urls.dashboard}">個人開発物投稿プラットフォーム</a>
     </div>
+
     <nav class="main-nav">
-      <a href="/login" class="nav-link">ログイン</a>
-      <a href="/register" class="nav-link">新規登録</a>
+      <!-- ko if: loggedIn() -->
+      <a data-bind="attr:{href: urls.mypage}" class="nav-link">マイページ</a>
+      <a data-bind="attr:{href: urls.logout}" class="nav-link">ログアウト</a>
+      <!-- /ko -->
+
+      <!-- ko ifnot: loggedIn() -->
+      <a data-bind="attr:{href: urls.login}" class="nav-link">ログイン</a>
+      <a data-bind="attr:{href: urls.register}" class="nav-link">新規登録</a>
+      <!-- /ko -->
     </nav>
   </div>
 </header>
 
-<body>
-</body>
+<script>
+  window.SESSION = <?= $session_boot ?>;
 
-</html>
+  function HeaderViewModel(session) {
+    this.loggedIn = ko.observable(!!session.loggedIn);
+    this.urls = session.urls || {};
+    this.setLoggedIn = () => {
+      this.loggedIn(true);
+    };
+    this.setLoggedOut = () => {
+      this.loggedIn(false);
+    };
+  }
+
+  ko.applyBindings(new HeaderViewModel(window.SESSION), document.getElementById('header'));
+</script>

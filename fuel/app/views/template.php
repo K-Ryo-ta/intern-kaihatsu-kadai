@@ -2,14 +2,16 @@
 <html>
 
 <head>
+  <?= Asset::js('knockout-3.5.1.js'); ?>
+  <?= Asset::css(['header.css']); ?>
 </head>
 
 <body>
   <header>
-    <?php echo $header; ?>
+    <?= $header; ?>
   </header>
   <div id="content">
-    <?php echo $content; ?>
+    <?= $content; ?>
   </div>
 </body>
 

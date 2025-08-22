@@ -5,12 +5,10 @@
   <meta charset="utf-8">
   <title>Register</title>
   <?= Asset::css('style.css'); ?>
-  <?= Asset::js('knockout-3.5.1.js'); ?>
 </head>
 
 <body>
   <?php
-  // 既存コントローラの $errors と $old をそのまま利用
   $initial = [
     'username' => $old['username'] ?? '',
     'bio'      => $old['bio'] ?? '',
@@ -20,7 +18,7 @@
     <h1>新規登録</h1>
 
     <?php if (!empty($errors)): ?>
-      <div style="color:red; margin-bottom: 12px;">
+      <div>
         <?php foreach ($errors as $msg): ?>
           <div><?= htmlspecialchars($msg, ENT_QUOTES, 'UTF-8') ?></div>
         <?php endforeach; ?>
@@ -55,20 +53,17 @@
           data-bind="value: bio, valueUpdate: 'afterkeydown'"></textarea>
       </div>
 
-      <div class="login-button-container" style="margin-top: 12px;">
-        <!-- 通常のフォーム送信。Knockoutで活性/非活性だけ制御 -->
-        <button type="submit" class="login-button"
+      <div class="button-container">
+        <button type="submit" class="submit-button"
           data-bind="enable: canSubmit()">新規登録</button>
       </div>
 
       <!-- クライアント側の簡易メッセージ（任意） -->
-      <p data-bind="visible: !canSubmit(), text: helperMessage"
-        style="color:#888; margin-top:8px;"></p>
+      <p data-bind="visible: !canSubmit(), text: helperMessage"></p>
     </form>
   </div>
 
   <script>
-    // PHPの値は必ず json_encode でJSへ渡す（&問題を防ぐ）
     const initialRegister = <?= json_encode($initial, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
 
     function RegisterViewModel(data) {
