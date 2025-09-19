@@ -75,8 +75,10 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              'X-CSRF-Token': window.CSRF_TOKEN, // CSRFトークンを追加
             },
+            credentials: 'same-origin', // クッキーの送信を追加
             body: JSON.stringify(data)
           });
 
