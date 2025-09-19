@@ -94,6 +94,7 @@ body {
   border-radius: 20px;
   font-size: 14px;
   display: inline-block;
+  text-decoration: none;
 }
 
 .pf-fab {

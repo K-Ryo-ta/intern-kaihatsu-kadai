@@ -30,7 +30,7 @@
 
       <div class="pf-tags" data-bind="visible: showTagsBlock">
         <div data-bind="foreach: tags">
-          <span class="pf-tag" data-bind="text: $data"></span>
+          <a data-bind="attr: { href: '/search?q=&tags=' + encodeURIComponent($data) }, text: $data" class="pf-tag"></a>
         </div>
 
         <a class="pf-fab"
