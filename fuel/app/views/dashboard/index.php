@@ -4,12 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>DashBoard</title>
-  <?php
-
-  use Fuel\Core\Asset;
-
-  Asset::css('dashboard.css');
-  ?>
+  <?= Asset::css('dashboard.css'); ?>
 </head>
 
 <body>

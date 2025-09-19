@@ -4,12 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Create-Portfolios</title>
-  <?php
-
-  use Fuel\Core\Asset;
-
-  Asset::css('mypage.css')
-  ?>
+  <?= Asset::css('mypage.css') ?>
 </head>
 
 <body>
