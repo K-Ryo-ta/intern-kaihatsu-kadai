@@ -33,12 +33,10 @@
     function DashboardViewModel() {
       const self = this;
 
-      // state
       self.items = ko.observableArray([]);
       self.isLoading = ko.observable(false);
       self.errorMessage = ko.observable('');
 
-      // methods
       self.load = async () => {
         self.isLoading(true);
         self.errorMessage('');
