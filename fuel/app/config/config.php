@@ -189,18 +189,13 @@ return array(
   /**
    * Cookie settings
    */
-  // 'cookie' => array(
-  // Number of seconds before the cookie expires
-  // 'expiration'  => 0,
-  // Restrict the path that the cookie is available to
-  // 'path'        => '/',
-  // Restrict the domain that the cookie is available to
-  // 'domain'      => null,
-  // Only transmit cookies over secure connections
-  // 'secure'      => false,
-  // Only transmit cookies over HTTP, disabling Javascript access
-  // 'http_only'   => false,
-  // ),
+
+  //HttpsOnly属性を付与している。
+  'cookie' => array(
+    'secure'      => true,
+    'http_only'   => true,
+    'same_site'    => 'Lax',
+  ),
 
   /**
    * Validation settings
