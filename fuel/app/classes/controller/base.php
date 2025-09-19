@@ -5,12 +5,15 @@ use Fuel\Core\Uri;
 use Fuel\Core\View;
 use Auth\Auth;
 
-class Controller_Base extends Controller_Template
-{
+/**
+ * @property \Fuel\Core\View $template
+ * @property \Fuel\Core\Response $response
+ */
+
+class Controller_Base extends Controller_Template {
   public $template = 'template';
 
-  public function before()
-  {
+  public function before() {
     parent::before();
 
     $is = Auth::check();
@@ -33,5 +36,16 @@ class Controller_Base extends Controller_Template
     if (!isset($this->template->title)) {
       $this->template->title = 'My App';
     }
+  }
+
+  //beforeにつけるとresponseが作成される前に適応されるため、afterでする。
+  public function after($response) {
+    $response = parent::after($response);
+
+    // クリックジャッキング対策ヘッダ
+    $response->set_header('X-Frame-Options', 'SAMEORIGIN', true);
+    $response->set_header('Content-Security-Policy', "frame-ancestors 'self'", true);
+
+    return $response;
   }
 }
