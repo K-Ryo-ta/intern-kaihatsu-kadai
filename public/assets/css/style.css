@@ -86,3 +86,13 @@ body {
  .submit-button:hover {
   background-color: #8acde5;
  }
+
+.remember{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.remember input{
+  margin-bottom: 0;
+  width: auto;
+}

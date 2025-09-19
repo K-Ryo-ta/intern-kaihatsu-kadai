@@ -32,6 +32,12 @@
           data-bind="value: password, valueUpdate: 'input'" required autocomplete="current-password">
       </div>
 
+      <div class="remember">
+        <input type="checkbox" id="remember"
+          data-bind="checked: remember">
+        <label for="remember">ログイン状態を保持する</label>
+      </div>
+
       <div class="button-container">
         <button type="submit" class="submit-button"
           data-bind="enable: canSubmit(), text: isSaving() ? 'ログイン中...' : 'ログイン'"></button>
@@ -47,9 +53,21 @@
       this.isSaving = ko.observable(false);
       this.errorMessage = ko.observable('');
       this.successMessage = ko.observable('');
+      this.remember = ko.observable(false);
       self.canSubmit = ko.computed(() => !!self.username() && !!self.password() && !self.isSaving());
 
+      self.showError = (msg) => {
+        self.errorMessage(msg);
+        self.successMessage('');
+      };
+      self.showSuccess = (msg) => {
+        self.successMessage(msg);
+        self.errorMessage('');
+      };
+
       self.login = async function(formElement, event) {
+        self.errorMessage('');
+        self.successMessage('');
 
         event.preventDefault();
         if (!self.canSubmit()) return; //連打防止
@@ -69,6 +87,7 @@
           const data = {
             username: self.username(),
             password: self.password(),
+            remember: self.remember()
           };
 
           const response = await fetch('/api/auth/login', {
