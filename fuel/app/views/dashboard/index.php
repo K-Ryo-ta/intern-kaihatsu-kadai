@@ -4,7 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>DashBoard</title>
-  <?= Asset::css('dashboard.css'); ?>
+  <?php
+
+  use Fuel\Core\Asset;
+
+  Asset::css('dashboard.css');
+  ?>
 </head>
 
 <body>

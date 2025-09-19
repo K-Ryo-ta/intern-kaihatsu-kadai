@@ -4,7 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Register</title>
-  <?= Asset::css('style.css'); ?>
+  <?php
+
+  use Fuel\Core\Asset;
+
+  Asset::css('style.css');
+  ?>
 </head>
 
 <body>

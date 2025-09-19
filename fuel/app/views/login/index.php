@@ -4,7 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Login</title>
-  <?= Asset::css('style.css'); ?>
+  <?
+
+  use Fuel\Core\Asset;
+
+  Asset::css('style.css');
+  ?>
 </head>
 
 <body>
