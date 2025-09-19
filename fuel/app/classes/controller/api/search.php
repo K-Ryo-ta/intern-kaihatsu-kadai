@@ -20,10 +20,7 @@ class Controller_Api_Search extends Controller_Api_Base {
 
     if ($q !== '') {
       $like = '%' . $q . '%';
-      $query->where_open()
-        ->where('p.title', 'like', $like)
-        ->or_where('p.description', 'like', $like)
-        ->where_close();
+      $query->where('p.title', 'like', $like);
     }
 
     $tag_names = $this->parse_tags_csv($tags_csv);
